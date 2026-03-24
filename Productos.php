@@ -1,43 +1,41 @@
 <?php
 session_start();
-require_once 'C:\xampp\htdocs\codigosphp\codigosphp\crud\db_conexion.php';
+require_once 'db_conexion.php';
 
 if (isset($_POST['accion'])) {
     $accion = $_POST['accion'];
     $id = $_POST['id'] ?? null;
-    $marca = $_POST['marca'] ?? null;
-    $modelo = $_POST['modelo'] ?? null;
-    $anio = $_POST['anio'] ?? null;
+    $nombre = $_POST['nombre'] ?? null;
     $precio = $_POST['precio'] ?? null;
+    $stock = $_POST['stock'] ?? null;
     $descripcion = $_POST['descripcion'] ?? null;
-    $imagen = $_POST['imagen'] ?? null;
 
-    if ($accion == 'agregar' && $id && $marca && $modelo && $anio && $precio) {
-        $sql = $cnnPDO->prepare("INSERT INTO autos (id, marca, modelo, anio, precio, descripcion, imagen) VALUES (:id, :marca, :modelo, :anio, :precio, :descripcion, :imagen)");
-        $sql->bindParam(':id', $id);
-        $sql->bindParam(':marca', $marca);
-        $sql->bindParam(':modelo', $modelo);
-        $sql->bindParam(':anio', $anio);
+    if ($accion == 'agregar' && $nombre && $precio && $stock && $descripcion) {
+        $sql = $cnnPDO->prepare("INSERT INTO productos (nombre, precio, stock, descripcion) 
+                                 VALUES (:nombre, :precio, :stock, :descripcion)");
+        $sql->bindParam(':nombre', $nombre);
         $sql->bindParam(':precio', $precio);
+        $sql->bindParam(':stock', $stock);
         $sql->bindParam(':descripcion', $descripcion);
-        $sql->bindParam(':imagen', $imagen);
         $sql->execute();
-    } elseif ($accion == 'editar' && $id && $marca && $modelo && $anio && $precio) {
-        $sql = $cnnPDO->prepare("UPDATE autos SET marca = :marca, modelo = :modelo, anio = :anio, precio = :precio, descripcion = :descripcion, imagen = :imagen WHERE id = :id");
-        $sql->bindParam(':id', $id);
-        $sql->bindParam(':marca', $marca);
-        $sql->bindParam(':modelo', $modelo);
-        $sql->bindParam(':anio', $anio);
+
+    } elseif ($accion == 'editar' && $id && $nombre && $precio && $stock && $descripcion) {
+        $sql = $cnnPDO->prepare("UPDATE productos 
+                                 SET nombre = :nombre, precio = :precio, stock = :stock, descripcion = :descripcion 
+                                 WHERE id = :id");
+        $sql->bindParam(':nombre', $nombre);
         $sql->bindParam(':precio', $precio);
+        $sql->bindParam(':stock', $stock);
         $sql->bindParam(':descripcion', $descripcion);
-        $sql->bindParam(':imagen', $imagen);
+        $sql->bindParam(':id', $id);
         $sql->execute();
+
     } elseif ($accion == 'eliminar' && $id) {
-        $sql = $cnnPDO->prepare("DELETE FROM autos WHERE id = :id");
+        $sql = $cnnPDO->prepare("DELETE FROM productos WHERE id = :id");
         $sql->bindParam(':id', $id);
         $sql->execute();
     }
 }
 
-$autos = $cnnPDO->query("SELECT * FROM autos")->fetchAll(PDO::FETCH_ASSOC);
+$productos = $cnnPDO->query("SELECT * FROM productos")->fetchAll(PDO::FETCH_ASSOC);
 ?>
