@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&family=Kalam&display=swap');
+
+
+body {
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+nav {
+    background-color: black;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Kalam', cursive;
+    font-size: 20px;
+}
+
+nav img {
+    width: 10vw;
+    transition: 0.5s;
+}
+
+nav img:hover {
+    transform: translateY(-10px);
+}
+
+.producto {
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.5s;
+    position: relative;
+    z-index: 1;
+    font-family: 'Jost', sans-serif;
+}
+
+a.producto {
+    text-decoration: none;
+    color: black;
+}
+
+.producto:hover {
+    transform: scale(1.1);
+}
+
+.caja-sesion {
+    max-width: 30vw;
+    margin-left: 100px;
+}
+
+.paso-publicar input {
+    max-width: 45vw;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.paso-publicar textarea {
+    max-width: 45vw;
+    height: 20vh;
+    margin: 0 auto;
+}
+
+.card-admin {
+    max-width: 25vw;
+    transition: 0.5s;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.card-admin:hover {
+    transform: scale(1.1);
+}
+
+.card-admin img {
+    width: 10vw;
+}
+
+.cards a {
+    text-decoration: none;
+    color: black;
+}
+
+.info-juego {
+    width: 35%;
+    height: 80vh;
+    position: relative;
+}
+
+.info-juego h1 {
+    border-bottom: black solid 15px;
+    padding-bottom: 15px;
+}
+
+.info-juego .precio {
+    font-size: 35px;
+    margin: 4rem 0;
+}
+
+.info-juego button {
+    border: 5px solid black !important;
+    border-radius: 0 !important;
+    padding: 1 auto !important;
+    font-size: 25px;
+}
+
+.carousel-producto {
+    position: relative;
+    max-width: 80vw;
+    height: 47vh;
+    border-top: 10px solid black;
+    border-bottom: 10px solid black;
+}
+
+.carousel-control-prev {
+    position: absolute;
+
+    background-image: url('imagenes/flecha-atras.png') !important; /* Ruta de la imagen para retroceder */
+    background-position: center !important;
+    background-size: 7vw !important;
+    background-repeat: no-repeat !important;
+}
+
+.carousel-control-next {
+    background-image: url('imagenes/flecha-adelante.png') !important; /* Ruta de la imagen para avanzar */
+    background-position: center !important;
+    background-size: 7vw !important;
+    background-repeat: no-repeat !important;
+}
+
+.titulos {
+    margin-bottom: 3rem;
+}
+
+.paso-publicar button, .boton-pagar {
+    border: 5px solid black !important;
+    border-radius: 0 !important;
+    padding: 1 auto !important;
+    font-size: 25px;
+    width: 15vw;
+}
