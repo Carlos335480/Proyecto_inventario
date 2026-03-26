@@ -117,19 +117,16 @@ if (isset($_POST['pagar'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagar Mercado UTC</title>
     <link rel="stylesheet" href="estilos.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="imagenes/logo2.png" type="image/x-icon">
 </head>
-
 <body>
-    <nav class="shadow p-5 mb-4">
+    <nav class="shadow p-5 mb-4 animar-fade-in visible">
         <div class="d-flex justify-content-between align-items-center">
             <img src="imagenes/logo3.png" alt="Mercado UTC">
             <div class="d-flex gap-5">
@@ -138,59 +135,59 @@ if (isset($_POST['pagar'])) {
         </div>
     </nav>
 
-    <div class="row">
-        <div class="col text-center">
-            <h3 class="display-3 text-center mb-4">Producto a Pagar</h3>
-            <img src='imagenes/<?php echo "$fotos[0]"; ?>' alt="<?php echo $titulo; ?>" style="width: 95%; height: 80vh;">
-        </div>
-        <div class="col p-5">
-            <h3 class="display-4 text-center  mb-4">Detalles de Pago</h3>
-            <form method="post">
-                <!-- Lugar de entrega -->
-                <div class="form-group">
-                    <label for="lugarEntrega">Lugar de Entrega</label>
-                    <select class="form-control" id="lugarEntrega" name="direccion">
-                        <option value="Edificio 1">Edificio 1</option>
-                        <option value="Edificio 2">Edificio 2</option>
-                        <option value="Edificio 3">Edificio 3</option>
-                        <option value="Edificio 4">Edificio 4</option>
-                        <option value="Dona Keka">Doña Keka</option>
-                        <option value="Cafeteria">Cafetería</option>
-                        <option value="Burritos Benja">Burritos Benja</option>
-                    </select>
-                </div>
-
-                <!-- Datos de Pago -->
-                <h4 class="m-4">Datos de Tarjeta</h4>
-                <div class="form-group mb-4">
-                    <label for="numeroTarjeta">Número de Tarjeta</label>
-                    <input type="text" class="form-control" id="tarjeta" name="tarjeta" required>
-                </div>
-                <div class="form-group mb-4">
-                    <label for="nombreTitular">Nombre del Titular</label>
-                    <input type="text" class="form-control" id="titular" name="titular" required>
-                </div>
-                <div class="row mb-5">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="fechaVencimiento">Fecha de Vencimiento</label>
-                            <input type="text" class="form-control" id="vencimiento" name="vencimiento" placeholder="MM/AA" required>
+    <div class="container mt-5">
+        <div class="row animar-fade-up">
+            <div class="col-md-6 text-center">
+                <h3 class="display-5 text-info mb-4">Producto a Pagar</h3>
+                <img src='imagenes/<?php echo "$fotos[0]"; ?>' class="rounded shadow" style="width: 100%; height: auto; max-height: 60vh; object-fit: cover;">
+            </div>
+            <div class="col-md-6 p-4">
+                <div class="caja-sesion w-100 m-0 p-5 shadow">
+                    <h3 class="display-6 text-center text-info mb-4">Detalles de Pago</h3>
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label for="lugarEntrega" class="text-light">Lugar de Entrega</label>
+                            <select class="form-control" id="lugarEntrega" name="direccion">
+                                <option value="Edificio 1">Edificio 1</option>
+                                <option value="Edificio 2">Edificio 2</option>
+                                <option value="Edificio 3">Edificio 3</option>
+                                <option value="Edificio 4">Edificio 4</option>
+                                <option value="Dona Keka">Doña Keka</option>
+                                <option value="Cafeteria">Cafetería</option>
+                                <option value="Burritos Benja">Burritos Benja</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" class="form-control" id="cvv" name="cvv" required>
+
+                        <h4 class="mt-4 mb-3 text-info">Datos de Tarjeta</h4>
+                        <div class="form-group mb-3">
+                            <label for="numeroTarjeta" class="text-light">Número de Tarjeta</label>
+                            <input type="text" class="form-control" id="tarjeta" name="tarjeta" required>
                         </div>
-                    </div>
+                        <div class="form-group mb-3">
+                            <label for="nombreTitular" class="text-light">Nombre del Titular</label>
+                            <input type="text" class="form-control" id="titular" name="titular" required>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="fechaVencimiento" class="text-light">Vencimiento</label>
+                                    <input type="text" class="form-control" id="vencimiento" name="vencimiento" placeholder="MM/AA" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="cvv" class="text-light">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" name="cvv" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success w-100 fs-5" name="pagar">Completar Pago</button>
+                    </form>
                 </div>
-
-                <!-- Botón de Pago -->
-                <button type="submit" class="btn btn-outline-dark boton-pagar" name="pagar">Completar Pago</button>
-
-            </form>
+            </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="animaciones.js"></script>
 </body>
-
 </html>

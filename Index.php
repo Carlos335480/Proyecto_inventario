@@ -9,31 +9,27 @@ if (isset($_POST['logout'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mercado UTC</title>
     <link rel="stylesheet" href="estilos.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="imagenes/logo2.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-aw esome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
-</head>
-
 <body>
-    <nav class="shadow p-5">
+    <nav class="shadow p-5 animar-fade-in visible">
         <div class="d-flex justify-content-between align-items-center">
             <img src="imagenes/logo3.png" alt="Mercado UTC">
             <div class="d-flex gap-5 align-items-center">
                 <?php if (empty($_SESSION['nombre'])) { ?>
-                    <a href="registro-inicio.php" class="btn btn-primary">Inicia Sesion / Registrate</a>
+                    <a href="registro-inicio.php" class="btn btn-outline-light text-white">Inicia Sesion / Registrate</a>
                 <?php } else { ?>
-                    <a href="#"><?php echo 'usuario: ' . $_SESSION['nombre']; ?></a>
+                    <a href="#" class="text-info"><?php echo 'Usuario: ' . $_SESSION['nombre']; ?></a>
                     <a href="agregar-producto.php">Vende Tu Producto</a>
                     <a href="perfil.php">Tu Perfil</a>
-                    <form method="post">
+                    <form method="post" class="m-0">
                         <button class="btn btn-danger" name="logout">Cerrar Sesion</button>
                     </form>
                 <?php } ?>
@@ -42,18 +38,16 @@ if (isset($_POST['logout'])) {
     </nav>
 
     <div class="seccion-juegos">
-        <h2 class="display-3 ms-5 mt-4 mb-5" style="font-family: 'Kalam', cursive; text-decoration: underline;">Los Mejores Productos</h2>
+        <h2 class="display-4 ms-5 mt-4 mb-5 animar-fade-up" style="font-family: 'Kalam', cursive; border-bottom: 2px solid #333; display: inline-block;">Los Mejores Productos</h2>
         <?php
-        // Mostrar los juegos y sus fotos
         $sql = "SELECT idproducto, titulo, precio, fotos FROM productos";
-        $result = $cnnPDO ->query($sql);
+        $result = $cnnPDO->query($sql);
         $result->execute();
 
         $count = $result->rowCount();
 
         if ($count) {
-
-            echo "<div class='container d-flex flex-wrap gap-3' style='padding-bottom: 10rem;'>";
+            echo "<div class='container d-flex flex-wrap gap-4 justify-content-center' style='padding-bottom: 10rem;'>";
             while ($row = $result->fetch()) {
                 $id = $row['idproducto'];
                 $titulo = $row["titulo"];
@@ -61,15 +55,12 @@ if (isset($_POST['logout'])) {
                 $fotos_serializadas = $row["fotos"];
                 $fotos = unserialize($fotos_serializadas);
         ?>
-                <a class="producto ms-1 me-5 mt-2" href="ver-producto.php?id=<?php echo $id ?>">
-                    <div class="" style="background: url(imagenes/<?php echo $fotos[0]; ?>); background-size: cover; background-position: center; background-repeat: no-repeat; width: 16rem; height: 20rem;">
-
+                <a class="producto animar-fade-up" href="ver-producto.php?id=<?php echo $id ?>" style="width: 16rem;">
+                    <div style="background: url(imagenes/<?php echo $fotos[0]; ?>); background-size: cover; background-position: center; background-repeat: no-repeat; height: 18rem;">
                     </div>
-                    <div class="d-flex" style="width: 16rem;">
-                        <div class="d-flex flex-column gap-2 mt-2">
-                            <h3><?php echo $titulo; ?></h3>
-                            <p>$<?php echo $precio; ?></p>
-                        </div>
+                    <div class="p-3">
+                        <h4 class="text-light"><?php echo $titulo; ?></h4>
+                        <p class="text-success fs-5 fw-bold">$<?php echo $precio; ?></p>
                     </div>
                 </a>
         <?php
@@ -78,26 +69,27 @@ if (isset($_POST['logout'])) {
         }
         ?>
     </div>
-    <footer style="background-color: black; color: white; padding: 40px 35px;">
-        <div class="container">
+    <footer style="padding: 40px 35px;">
+        <div class="container animar-fade-up">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 style="color: white;">Contactanos</h4>
-                    <p style="color: white;">Dirección: Av. Industria Metalúrgica No. 2001, Ramos Arizpe, Mexico</p>
-                    <p style="color: white;">Teléfono: +1 844-288-3800</p>
+                    <h4 class="text-info">Contactanos</h4>
+                    <p>Dirección: Av. Industria Metalúrgica No. 2001, Ramos Arizpe, Mexico</p>
+                    <p>Teléfono: +1 844-288-3800</p>
                 </div>
                 <div class="col-md-6">
-                    <h4 style="color: white;">Síguenos</h4>
-                    <a href="https://www.facebook.com/UniversidadTecnologicadeCoahuila/?locale=es_LA" target="_blank" style="color: white; text-decoration: none; margin-right: 10px;">
+                    <h4 class="text-info">Síguenos</h4>
+                    <a href="https://www.facebook.com/UniversidadTecnologicadeCoahuila/?locale=es_LA" target="_blank" class="text-light fs-4 me-3">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <!-- Ícono de Instagram -->
-                    <a href="https://www.instagram.com/utcoahuila/" target="_blank" style="color: white; text-decoration: none; margin-right: 10px;">
+                    <a href="https://www.instagram.com/utcoahuila/" target="_blank" class="text-light fs-4">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="animaciones.js"></script>
 </body>
 </html>

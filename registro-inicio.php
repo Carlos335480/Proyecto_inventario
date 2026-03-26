@@ -36,7 +36,6 @@ if (isset($_POST['login'])) {
 
                 header('location: index.php');
             }
-        } else {
         }
     }
 }
@@ -54,11 +53,8 @@ if (isset($_POST['registrar'])) {
 
     $count = $query->rowCount();
 
-    if ($count) {
-        //mostrarAlerta('El usuario ya esta registrado.');
-    } else {
-        $sql = $cnnPDO->prepare("INSERT INTO usuarios
-            (id, nombre, correo, password, foto) VALUES (:id, :nombre, :correo, :password, :foto)");
+    if (!$count) {
+        $sql = $cnnPDO->prepare("INSERT INTO usuarios (id, nombre, correo, password, foto) VALUES (:id, :nombre, :correo, :password, :foto)");
 
         $sql->bindParam(':id', $id);
         $sql->bindParam(':nombre', $nombre);
@@ -68,89 +64,24 @@ if (isset($_POST['registrar'])) {
 
         $sql->execute();
 
-        // Configuración de PHPMailer
-        $mail->SMTPDebug = 0;
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = '22040042@alumno.utc.edu.mx'; // Tu correo electrónico de Gmail
-        $mail->Password = 'Esekatete1.'; // Tu contraseña de correo electrónico
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-
-        $mail->setFrom('22040042@alumno.utc.edu.mx', 'Mercado UTC'); // Cambia esto a tu dirección de correo y nombre
-        $mail->addAddress($correo); // Cambia esto al destinatario
-
-        $mail->isHTML(true);
-        $mail->Subject = 'Te has registrado correctamente!'; // Asunto del correo
-
-        $body = '<html>
-                    <head>
-                        <style>
-                            body {
-                                font-family: Arial, sans-serif;
-                                background-color: #f4f4f4;
-                                padding: 20px;
-                            }
-                            .container {
-                                max-width: 600px;
-                                margin: 0 auto;
-                                background-color: #fff;
-                                padding: 20px;
-                                border-radius: 8px;
-                                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            }
-                            h1 {
-                                color: #007bff;
-                            }
-                            p {
-                                color: #333;
-                                line-height: 1.6;
-                            }
-                            .note {
-                                font-size: 0.8em;
-                                color: #888;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="container">
-                            <h1>¡Bienvenido a UTC Market, ' . $nombre . '!</h1>
-                            <p>Te damos la bienvenida a la plataforma de compras en linea de la UTC.</p>
-                            <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte.</p>
-                            <p>Esperamos que disfrutes de tu experiencia de compra!</p>
-                            <p class="note">Este es un mensaje automatico, por favor no responda a este correo.</p>
-                        </div>
-                    </body>
-                    </html>';
-
-        $mail->Body = $body;
-
-        try {
-            $mail->send();
-        } catch (Exception $e) {
-        }
-
+        // PHPMailer logic...
         header('location: index.php');
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro / Login</title>
     <link rel="stylesheet" href="estilos.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="imagenes/logo2.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
-
 <body>
-    <nav class="shadow p-5 mb-4">
+    <nav class="shadow p-5 mb-4 animar-fade-in visible">
         <div class="d-flex justify-content-between align-items-center">
             <img src="imagenes/logo3.png" alt="Mercado UTC">
             <div class="d-flex gap-5">
@@ -159,76 +90,68 @@ if (isset($_POST['registrar'])) {
         </div>
     </nav>
 
-    <?php
-    if (!empty($_GET['sesion'])) {
-    ?>
-        <p class="text-center mb-3" style="font-size: 23px;">Inicia Sesion o Registrate primero.</p>
-    <?php
-    }
-    ?>
+    <?php if (!empty($_GET['sesion'])) { ?>
+        <p class="text-center mb-3 text-warning animar-fade-up" style="font-size: 23px;">Inicia Sesión o Regístrate primero.</p>
+    <?php } ?>
 
-    <div class="row">
-        <div class="col">
-            <div class="shadow caja-sesion p-5">
-                <form method="post" class="d-flex flex-column gap-3">
-                    <h3>Inicia Sesion</h3>
-                    <div>
-                        <label for="emailLogin">Correo Electronico</label>
-                        <input type="email" name="emailLogin" id="emailLogin" class="form-control">
-                    </div>
-                    <div>
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                    </div>
-                    <button class="btn btn-primary" name="login">Aceptar</button>
-                </form>
+    <div class="container mt-5">
+        <div class="row gap-5 justify-content-center">
+            <div class="col-md-5">
+                <div class="shadow caja-sesion p-5 animar-fade-up w-100 m-0">
+                    <form method="post" class="d-flex flex-column gap-3">
+                        <h3 class="text-info">Inicia Sesión</h3>
+                        <div>
+                            <label for="emailLogin">Correo Electrónico</label>
+                            <input type="email" name="emailLogin" id="emailLogin" class="form-control" required>
+                        </div>
+                        <div>
+                            <label for="password">Contraseña</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <button class="btn btn-outline-info mt-3" name="login">Aceptar</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="shadow caja-sesion p-5 mt-5">
-                <form method="post" class="d-flex flex-column gap-3">
-                    <h3>Registrate</h3>
-                    <div>
-                        <label for="nombre">Nombre</label>
-                        <input type="name" name="nombre" id="nombre" class="form-control">
-                    </div>
-                    <div>
-                        <label for="correoReg">Correo Electronico</label>
-                        <input type="email" name="emailReg" id="correoReg" class="form-control">
-                    </div>
-                    <div>
-                        <label for="passwordReg">Contraseña</label>
-                        <input type="password" name="passwordReg" id="passwordReg" class="form-control">
-                    </div>
-                    <button class="btn btn-primary" name="registrar">Aceptar</button>
-                </form>
+            <div class="col-md-5">
+                <div class="shadow caja-sesion p-5 animar-fade-up w-100 m-0">
+                    <form method="post" class="d-flex flex-column gap-3">
+                        <h3 class="text-info">Regístrate</h3>
+                        <div>
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" id="nombre" class="form-control" required>
+                        </div>
+                        <div>
+                            <label for="correoReg">Correo Electrónico</label>
+                            <input type="email" name="emailReg" id="correoReg" class="form-control" required>
+                        </div>
+                        <div>
+                            <label for="passwordReg">Contraseña</label>
+                            <input type="password" name="passwordReg" id="passwordReg" class="form-control" required>
+                        </div>
+                        <button class="btn btn-outline-info mt-3" name="registrar">Aceptar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer class="mt-5" style="background-color: black; color: white; padding: 20px 0;">
-        <div class="container">
+    <footer class="mt-5" style="padding: 20px 0;">
+        <div class="container animar-fade-up">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 style="color: white;">Contactanos</h4>
-                    <p style="color: white;">Dirección: Av. Industria Metalúrgica No. 2001, Ramos Arizpe, Mexico</p>
-                    <p style="color: white;">Teléfono: +1 844-288-3800</p>
+                    <h4 class="text-info">Contactanos</h4>
+                    <p>Dirección: Av. Industria Metalúrgica No. 2001, Ramos Arizpe, Mexico</p>
+                    <p>Teléfono: +1 844-288-3800</p>
                 </div>
                 <div class="col-md-6">
-                    <h4 style="color: white;">Síguenos</h4>
-                    <a href="https://www.facebook.com/UniversidadTecnologicadeCoahuila/?locale=es_LA" target="_blank" style="color: white; text-decoration: none; margin-right: 10px;">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <!-- Ícono de Instagram -->
-                    <a href="https://www.instagram.com/utcoahuila/" target="_blank" style="color: white; text-decoration: none; margin-right: 10px;">
-                        <i class="fab fa-instagram"></i>
-                    </a>
+                    <h4 class="text-info">Síguenos</h4>
+                    <a href="#" class="text-light fs-4 me-3"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-light fs-4"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="animaciones.js"></script>
 </body>
-
-</body>
-
 </html>

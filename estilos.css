@@ -1,20 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&family=Kalam&display=swap');
 
-
 body {
     box-sizing: border-box;
     overflow-x: hidden;
+    background-color: #121212 !important; /* Fondo oscuro */
+    color: #e0e0e0 !important; /* Texto claro */
 }
 
-nav {
-    background-color: black;
+/* Navegación y Footers */
+nav, footer {
+    background-color: #000000 !important;
+    border-bottom: 1px solid #333;
 }
 
 nav a {
     text-decoration: none;
-    color: white;
+    color: #ffffff;
     font-family: 'Kalam', cursive;
     font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #0d6efd;
 }
 
 nav img {
@@ -26,105 +34,81 @@ nav img:hover {
     transform: translateY(-10px);
 }
 
-.producto {
-    cursor: pointer;
-    display: inline-block;
-    transition: 0.5s;
-    position: relative;
-    z-index: 1;
-    font-family: 'Jost', sans-serif;
+/* Tarjetas y Contenedores */
+.caja-sesion, .box, .info-juego, .carousel-producto, .paso-publicar {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #333 !important;
+    border-radius: 10px;
 }
 
-a.producto {
-    text-decoration: none;
-    color: black;
+/* Inputs y Formularios oscuros */
+.form-control {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
 }
 
-.producto:hover {
-    transform: scale(1.1);
+.form-control::placeholder {
+    color: #aaaaaa !important;
 }
 
-.caja-sesion {
-    max-width: 30vw;
-    margin-left: 100px;
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    border-color: #0d6efd !important;
 }
 
-.paso-publicar input {
+.paso-publicar input, .paso-publicar textarea {
     max-width: 45vw;
-    height: 50px;
     margin: 0 auto;
 }
 
 .paso-publicar textarea {
-    max-width: 45vw;
     height: 20vh;
-    margin: 0 auto;
 }
 
-.card-admin {
-    max-width: 25vw;
-    transition: 0.5s;
+/* Productos */
+.producto {
     cursor: pointer;
-    border-radius: 15px;
-}
-
-.card-admin:hover {
-    transform: scale(1.1);
-}
-
-.card-admin img {
-    width: 10vw;
-}
-
-.cards a {
-    text-decoration: none;
-    color: black;
-}
-
-.info-juego {
-    width: 35%;
-    height: 80vh;
+    display: inline-block;
+    transition: all 0.4s ease;
     position: relative;
+    z-index: 1;
+    font-family: 'Jost', sans-serif;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.info-juego h1 {
-    border-bottom: black solid 15px;
-    padding-bottom: 15px;
+a.producto {
+    text-decoration: none;
+    color: #e0e0e0;
 }
 
-.info-juego .precio {
-    font-size: 35px;
-    margin: 4rem 0;
+.producto:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
 }
 
-.info-juego button {
-    border: 5px solid black !important;
-    border-radius: 0 !important;
-    padding: 1 auto !important;
-    font-size: 25px;
-}
-
+/* Carrusel y Botones */
 .carousel-producto {
     position: relative;
     max-width: 80vw;
     height: 47vh;
-    border-top: 10px solid black;
-    border-bottom: 10px solid black;
 }
 
 .carousel-control-prev {
-    position: absolute;
-
-    background-image: url('imagenes/flecha-atras.png') !important; /* Ruta de la imagen para retroceder */
+    background-image: url('imagenes/flecha-atras.png') !important; 
     background-position: center !important;
-    background-size: 7vw !important;
+    background-size: 5vw !important;
     background-repeat: no-repeat !important;
 }
 
 .carousel-control-next {
-    background-image: url('imagenes/flecha-adelante.png') !important; /* Ruta de la imagen para avanzar */
+    background-image: url('imagenes/flecha-adelante.png') !important; 
     background-position: center !important;
-    background-size: 7vw !important;
+    background-size: 5vw !important;
     background-repeat: no-repeat !important;
 }
 
@@ -132,10 +116,60 @@ a.producto {
     margin-bottom: 3rem;
 }
 
-.paso-publicar button, .boton-pagar {
-    border: 5px solid black !important;
-    border-radius: 0 !important;
-    padding: 1 auto !important;
-    font-size: 25px;
-    width: 15vw;
+.paso-publicar button, .boton-pagar, .info-juego button {
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 5px !important;
+    font-size: 20px;
+    transition: 0.3s;
+    color: white;
+}
+
+.paso-publicar button:hover, .boton-pagar:hover, .info-juego button:hover {
+    background-color: #e0e0e0 !important;
+    color: black !important;
+}
+
+/* Paneles Admin */
+.container .box-container {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 15px;
+}
+
+.Headers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    color: #0d6efd;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.box {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+    padding: 30px 20px;
+    transition: 0.5s;
+}
+
+.box:hover {
+    transform: scale(1.02);
+}
+
+/* =========================================
+   CLASES DE ANIMACIÓN
+   ========================================= */
+.animar-fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animar-fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
 }

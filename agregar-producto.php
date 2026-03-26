@@ -12,7 +12,6 @@ if (isset($_POST['publicar'])) {
     $precio = $_POST["precio"];
     $descripcion = $_POST["descripcion"];
 
-
     $fotos = $_FILES["fotos"];
     $foto_nombres = array();
     foreach ($fotos["tmp_name"] as $key => $tmp_name) {
@@ -43,20 +42,17 @@ if (isset($_POST['publicar'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vender Mercado UTC</title>
     <link rel="stylesheet" href="estilos.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="imagenes/logo2.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
-
 <body>
-    <nav class="shadow p-5 mb-4">
+    <nav class="shadow p-5 mb-4 animar-fade-in visible">
         <div class="d-flex justify-content-between align-items-center">
             <img src="imagenes/logo3.png" alt="Mercado UTC">
             <div class="d-flex gap-5">
@@ -64,36 +60,36 @@ if (isset($_POST['publicar'])) {
             </div>
         </div>
     </nav>
-    <div class="ms-5" style="text-align: center;">
-        <h1 class="display-4">Publica un articulo para vender</h1>
-        <p>Completa la siguiente informacion</p>
+    <div class="ms-5 animar-fade-up" style="text-align: center;">
+        <h1 class="display-4 text-info">Publica un articulo para vender</h1>
+        <p class="text-light">Completa la siguiente informacion</p>
     </div>
     <form method="post" enctype="multipart/form-data">
-        <div id="miCarrusel" class="carousel carousel-producto slide mx-auto mt-5">
+        <div id="miCarrusel" class="carousel carousel-producto slide mx-auto mt-5 p-4 shadow animar-fade-up">
             <div class="carousel-inner text-center">
                 <div class="carousel-item active">
-                    <div class="paso-publicar ">
-                        <h4 class="display-5 titulos mt-5"> - Titulo de la publicacion - </h4>
+                    <div class="paso-publicar p-4">
+                        <h4 class="display-5 titulos mt-3 text-info">Título de la publicación</h4>
                         <input type="text" name="titulo" class="form-control mx-auto" required>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="paso-publicar">
-                        <h4 class="display-5 titulos mt-5">Precio del producto</h4>
+                    <div class="paso-publicar p-4">
+                        <h4 class="display-5 titulos mt-3 text-info">Precio del producto</h4>
                         <input type="number" name="precio" class="form-control mx-auto" required>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="paso-publicar">
-                        <h4 class="display-5 titulos mt-5">Agrega una descripcion</h4>
-                        <textarea name="descripcion" class="form-control" cols="30" rows="10" required></textarea>
+                    <div class="paso-publicar p-4">
+                        <h4 class="display-5 titulos mt-3 text-info">Agrega una descripción</h4>
+                        <textarea name="descripcion" class="form-control mx-auto" required></textarea>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="paso-publicar">
-                        <h4 class="display-5 titulos mt-5">Imagen del producto</h4>
-                        <input type="file" class="form-control" name="fotos[]" multiple required>
-                        <button class="btn btn-outline-dark mt-2" name="publicar">Publicar</button>
+                    <div class="paso-publicar p-4">
+                        <h4 class="display-5 titulos mt-3 text-info">Imagen del producto</h4>
+                        <input type="file" class="form-control mx-auto" name="fotos[]" multiple required>
+                        <button class="btn btn-outline-info mt-4" name="publicar">Publicar</button>
                     </div>
                 </div>
             </div>
@@ -105,35 +101,34 @@ if (isset($_POST['publicar'])) {
             </button>
         </div>
     </form>
-    <br>
-    <footer style="background-color: black; color: white; padding: 20px 0;">
-        <div class="container">
+    <br><br>
+    <footer style="padding: 20px 0;">
+        <div class="container animar-fade-up">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 style="color: white;">Contactanos</h4>
-                    <p style="color: white;">Dirección: Av. Industria Metalúrgica No. 2001, Ramos Arizpe, Mexico</p>
-                    <p style="color: white;">Teléfono: +1 844-288-3800</p>
+                    <h4 class="text-info">Contactanos</h4>
+                    <p>Dirección: Av. Industria Metalúrgica No. 2001, Ramos Arizpe, Mexico</p>
+                    <p>Teléfono: +1 844-288-3800</p>
                 </div>
                 <div class="col-md-6">
-                    <h4 style="color: white;">Síguenos</h4>
-                    <a href="https://www.facebook.com/UniversidadTecnologicadeCoahuila/?locale=es_LA" target="_blank" style="color: white; text-decoration: none; margin-right: 10px;">
+                    <h4 class="text-info">Síguenos</h4>
+                    <a href="https://www.facebook.com/UniversidadTecnologicadeCoahuila/?locale=es_LA" target="_blank" class="text-light fs-4 me-3">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <!-- Ícono de Instagram -->
-                    <a href="https://www.instagram.com/utcoahuila/" target="_blank" style="color: white; text-decoration: none; margin-right: 10px;">
+                    <a href="https://www.instagram.com/utcoahuila/" target="_blank" class="text-light fs-4">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="animaciones.js"></script>
     <script>
-        // Detener el avance automático del carrusel
         var miCarrusel = new bootstrap.Carousel(document.getElementById('miCarrusel'), {
-            interval: false // Puedes cambiar false por un número de milisegundos para ajustar la velocidad
+            interval: false 
         });
     </script>
 </body>
-
 </html>
